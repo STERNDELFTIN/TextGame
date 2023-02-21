@@ -18,50 +18,60 @@ namespace TextRPG
 
             while ( true )
             {
-                switch(GameExec.StartTheGame())
+                #region 로그인 및 계정생성
+                while (true)
                 {
-                    case 1: // 로그인
-                        id = Account.Login(playersList, account);
-                        if (id.Equals(""))
-                            continue;
-                        break;
-                    case 2: // 회원가입
-                        id = Account.CreateID(playersList);
-                        password = Account.CreatePassword();
+                    bool b = false;
+                    switch (GameExec.StartTheGame())
+                    {
+                        case 1: // 로그인
+                            id = Account.Login(playersList, account);
+                            if (id.Equals(""))
+                                continue;
+                            b = true;
+                            break;
+                        case 2: // 회원가입
+                            id = Account.CreateID(playersList);
+                            password = Account.CreatePassword();
 
-                        // 직업 선택 여부
-                        if (Job.WhetherSelectJob() == false)
-                        {
-                            Console.WriteLine("Select again, please.");
-                            continue;
-                        }
-
-                        playersList.Add(id, new Player(id));
-                        account.Add(id, password);
-                        
-                        // 직업 선택
-                        while (true)
-                        {
-                            Job.JobType jobChoice = Job.SelectJobType();
-                            if (jobChoice == Job.JobType.UNKNOWN)
+                            // 직업 선택 여부
+                            if (Job.WhetherSelectJob() == false)
                             {
                                 Console.WriteLine("Select again, please.");
                                 continue;
                             }
-                            Job.SelectJob(jobChoice, id, playersList);
+
+                            playersList.Add(id, new Player(id));
+                            account.Add(id, password);
+
+                            // 직업 선택
+                            while (true)
+                            {
+                                Job.JobType jobChoice = Job.SelectJobType();
+                                if (jobChoice == Job.JobType.UNKNOWN)
+                                {
+                                    Console.WriteLine("Select again, please.");
+                                    continue;
+                                }
+                                Job.SelectJob(jobChoice, id, playersList);
+                                break;
+                            }
                             break;
-                        }
+                        case 3: // 비밀번호 찾기
+                                // Account.FindAccount(account):
+                            break;
+                        case 4: // 종료
+                            GameExec.EndTheGame();
+                            return;
+                        default:
+                            Console.WriteLine("Select again, please.\n");
+                            continue;
+                    }
+
+                    if (b == true)
                         break;
-                    case 3: // 비밀번호 찾기
-                        // Account.FindAccount(account):
-                        break;
-                    case 4: // 종료
-                        GameExec.EndTheGame();
-                        return;
-                    default:
-                        Console.WriteLine("Select again, please.\n");
-                        continue;
                 }
+                
 
                 Console.WriteLine();
                 Console.WriteLine("[플레이어 정보]");
@@ -76,6 +86,12 @@ namespace TextRPG
                     Console.WriteLine($"아이디: {item.Key}, 비밀번호: {item.Value}");
                 }
 
+
+                #endregion
+
+                #region 게임 입장
+
+                #endregion
                 /*player.EXPUP();
                Console.WriteLine($"Level: {player.Level}, EXP: {player.EXP}");
                player.LevelUp();*/
