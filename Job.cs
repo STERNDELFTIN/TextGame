@@ -25,6 +25,7 @@ namespace TextRPG
             Warlord.WriteJobInfo();
             Archer.WriteJobInfo();
             Wizard.WriteJobInfo();
+            Console.WriteLine();
         }
 
         static public bool WhetherSelectJob() // 직업 선택 여부
@@ -33,6 +34,7 @@ namespace TextRPG
             char selectAnswer;
             while (true)
             {
+                Console.WriteLine("[직업 선택]");
                 Console.WriteLine("직업을 선택하시겠습니까? (Y/N)");
                 Console.Write("입력# ");
                 selectAnswer = Convert.ToChar(Console.ReadLine());
@@ -54,13 +56,14 @@ namespace TextRPG
         /// 반환형과 접근지정자를 맞춰주지 않았을 경우 에러가 발생함
         static public JobType SelectJobType() // 직업 타입 선택
         {
-            Console.WriteLine("[직업 선택]");
+            Console.WriteLine("[직업 종류]");
             JobList();
 
             Console.WriteLine("원하는 직업의 번호를 입력하세요.");
             Console.Write("입력# ");
             string choice = Console.ReadLine();
 
+            Console.WriteLine();
             switch (choice)
             {
                 case "1":
@@ -90,7 +93,7 @@ namespace TextRPG
                     playersList[id] = new Wizard();
                     break;
             }
-            Console.WriteLine($"플레이어 [{id}]님의 직업은 [{playersList[id].job}] 입니다. 현재 체력은 [{playersList[id].HP}]이고, 데미지는 [{playersList[id].STR}] 입니다.");
+            Console.WriteLine($"플레이어 [{id}]님의 직업은 [{playersList[id].job}] 입니다. 현재 체력은 [{playersList[id].HP}]이고, 데미지는 [{playersList[id].STR}] 입니다.\n");
         }
     }
 }

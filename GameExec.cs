@@ -12,7 +12,7 @@ namespace TextRPG
         public static int StartTheGame()
         {
             Console.WriteLine("TextRPG에 오신 것을 환영합니다!");
-            
+
             while (true)
             {
                 Console.WriteLine("[1]로그인\n[2]회원가입\n[3]비밀번호 찾기\n[4]종료");
@@ -26,12 +26,17 @@ namespace TextRPG
                     Console.WriteLine("Select again, please.\n");
             }
         }
+        public static void EnterTheGame(string id)
+        {
+            Console.WriteLine($"[{id}]님이 접속했습니다!");
+
+        }
         #endregion
 
         #region 게임종료
         public static void EndTheGame()
         {
-            Console.WriteLine("게임을 종료합니다.");
+            Console.WriteLine("게임을 종료합니다!");
         }
         #endregion
     }

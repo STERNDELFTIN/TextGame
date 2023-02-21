@@ -37,6 +37,7 @@ namespace TextRPG
                     Console.Write("입력# ");
                     int.TryParse(Console.ReadLine(), out int input);
                     Console.WriteLine();
+
                     switch(input)
                     {
                         case 1: default:
@@ -54,6 +55,7 @@ namespace TextRPG
 
                 break;
             }
+            Console.WriteLine();
             return id;
         }
 
