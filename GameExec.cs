@@ -26,9 +26,35 @@ namespace TextRPG
                     Console.WriteLine("Select again, please.\n");
             }
         }
-        public static void EnterTheGame(string id)
+        public static void EnterTheGame(Dictionary<string, Player> player, string id)
         {
             Console.WriteLine($"[{id}]님이 접속했습니다!");
+            Console.WriteLine("[1]마을 입장\n[2]던전 입장");
+            while (true)
+            {
+                Console.Write("입력# ");
+                int.TryParse(Console.ReadLine(), out int input);
+                Console.WriteLine();
+
+                if (input == 1)
+                    EnterTheTown(player, id);
+                else if (input == 2)
+                    EnterTheDungeon(player, id);
+                else
+                {
+                    Console.WriteLine("Select again, please.\n");
+                    continue;
+                }
+            }
+        }
+        // 타운 입장
+        public static void EnterTheTown(Dictionary<string, Player> player, string id)
+        {
+
+        }
+        public static void EnterTheDungeon(Dictionary<string, Player> player, string id)
+        {
+            Console.WriteLine("[1]↑ [2]↓ [3]← [4]→");
 
         }
         #endregion

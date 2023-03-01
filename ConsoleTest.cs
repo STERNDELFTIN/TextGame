@@ -95,19 +95,23 @@ namespace TextRPG
                 #region 게임 입장
                 while (true)
                 {
-                    WritePlayerInfo(playersList, account); // 플레이어 정보 (나중에 지움)
                     Console.WriteLine();
-                    GameExec.EnterTheGame(id);
-
-                    // 테스트
-                    playersList[id].EXPUP();
-                    Console.WriteLine($"Level: {playersList[id].Level}, EXP: {playersList[id].EXP}\n");
-                    playersList[id].LevelUp();
-                    Console.WriteLine($"Level: {playersList[id].Level}, EXP: {playersList[id].EXP}\n");
+                    GameExec.EnterTheGame(playersList, id);
 
 
+                    Player.PrintPlayerList(playersList, id);
 
-                    WritePlayerInfo(playersList, account); // 플레이어 정보 (나중에 지움)
+                    // 1. 마을 입장? 던전 입장?
+
+                    // 1-1. 마을 입장
+                    /// 가게, 훈련장, npc 호감도
+             
+                    // 1-2. 던전 입장
+                    /// 앞으로 전진
+                    /// 확률적으로 몬스터와 조우하거나 아이템 획득할 수 있다거나 아무 일도 발생하지 않음
+                    /// 몬스터와 전투 시, 피가 0이하로 내려간다면 마을에서 부활 (일정 레벨 혹은 경험치 감소)
+                    /// 몬스터와의 전투 성공 시에는 일정 경험치 획득
+
                     break;
                 }
                 #endregion

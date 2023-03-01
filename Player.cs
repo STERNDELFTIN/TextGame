@@ -137,6 +137,11 @@ namespace TextRPG
         }
         #endregion
 
+        public static void PrintPlayerList(Dictionary<string, Player> player, string id)
+        {
+            Console.WriteLine("[플레이어 정보]");
+            Console.WriteLine($"아이디: {player[id].ID}\nhp: {player[id].HP}\nstr: {player[id].STR}\n레벨: {player[id].Level} ({player[id].EXP}*0.1%)\n잔여 포인트: {player[id].Remaining_StatPoint}");
+        }
     }
 }
 
