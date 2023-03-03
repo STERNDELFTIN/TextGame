@@ -13,7 +13,9 @@ namespace TextRPG
         {
             Dictionary<string, Player> playersList = new Dictionary<string, Player>();
             Dictionary<string, string> account = new Dictionary<string, string>();
-            // Monster monster = new Monster(); // 몬스터
+            Monster monster = new Monster(); // 몬스터
+            
+
             string id = "", password = "";
             bool b = false; // 반복문을 빠져나오기 위한 수단으로 사용
 
@@ -96,12 +98,8 @@ namespace TextRPG
                 while (true)
                 {
                     Console.WriteLine();
-                    GameExec.EnterTheGame(playersList, id);
-
-
-                    Player.PrintPlayerList(playersList, id);
-
                     // 1. 마을 입장? 던전 입장?
+                    GameExec.EnterTheGame(playersList, id);
 
                     // 1-1. 마을 입장
                     /// 가게, 훈련장, npc 호감도
@@ -111,6 +109,7 @@ namespace TextRPG
                     /// 확률적으로 몬스터와 조우하거나 아이템 획득할 수 있다거나 아무 일도 발생하지 않음
                     /// 몬스터와 전투 시, 피가 0이하로 내려간다면 마을에서 부활 (일정 레벨 혹은 경험치 감소)
                     /// 몬스터와의 전투 성공 시에는 일정 경험치 획득
+                    
 
                     break;
                 }

@@ -6,9 +6,30 @@ using System.Threading.Tasks;
 
 namespace TextRPG
 {
+    public enum Map { Lobby, Dungeon, Town }
+
     public class GameExec
     {
-        #region 게임시작
+        private Map map = Map.Lobby;
+
+        public void Process()
+        {
+            switch (map)
+            {
+                case Map.Lobby:
+                    ProcessLobby();
+                    break;
+                case Map.Dungeon:
+                    ProcessDungeon();
+                    break;
+                case Map.Town:
+                    ProcessTown();
+                    break;
+                default:
+                    continue;
+            }
+        }
+
         public static int StartTheGame()
         {
             Console.WriteLine("TextRPG에 오신 것을 환영합니다!");
@@ -26,6 +47,7 @@ namespace TextRPG
                     Console.WriteLine("Select again, please.\n");
             }
         }
+
         public static void EnterTheGame(Dictionary<string, Player> player, string id)
         {
             Console.WriteLine($"[{id}]님이 접속했습니다!");
@@ -37,9 +59,9 @@ namespace TextRPG
                 Console.WriteLine();
 
                 if (input == 1)
-                    EnterTheTown(player, id);
+                    new Town(player, id);
                 else if (input == 2)
-                    EnterTheDungeon(player, id);
+                    new Dungeon(player, id);
                 else
                 {
                     Console.WriteLine("Select again, please.\n");
@@ -47,23 +69,11 @@ namespace TextRPG
                 }
             }
         }
-        // 타운 입장
-        public static void EnterTheTown(Dictionary<string, Player> player, string id)
-        {
 
-        }
-        public static void EnterTheDungeon(Dictionary<string, Player> player, string id)
-        {
-            Console.WriteLine("[1]↑ [2]↓ [3]← [4]→");
-
-        }
-        #endregion
-
-        #region 게임종료
         public static void EndTheGame()
         {
             Console.WriteLine("게임을 종료합니다!");
         }
-        #endregion
+
     }
 }

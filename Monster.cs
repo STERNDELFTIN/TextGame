@@ -21,32 +21,52 @@ namespace TextRPG
             for (int StatNum = 1; StatNum < StatTypeSize() + 1; StatNum++)
             {
                 StatName = Enum.GetName(typeof(StatType), StatNum);
-                System.Console.WriteLine($"{StatNum}. {StatName}");
+                Console.WriteLine($"{StatNum}. {StatName}");
             }
         }
-        protected int Level { get; set; }
-        protected int HP { get; set; }
-        protected int STR { get; set; }
 
+        protected string Name { get; private set; }
+        protected int Level { get; private set; }
+        protected int HP { get; private set; }
+        protected int STR { get; private set; }
+
+        public void Info() { }
         public class Rabbit : Monster
         {
-            protected new int Level { get; set; } = 1;
-            protected new int HP { get; set; } = 10;
-            protected new int STR { get; set; } = 1;
-
+            protected new string Name { get; private set; } = "Rabbit";
+            protected new int Level { get; private set; } = 1;
+            protected new int HP { get; private set; } = 10;
+            protected new int STR { get; private set; } = 1;
+            
+            public void Info()
+            {
+                Console.WriteLine($"LV{Level} [{Name}] HP: {HP}, STR: {STR}");
+            }
         }
         public class Wolf : Monster
         {
-            protected new int Level { get; set; } = 2;
-            protected new int HP { get; set; } = 30;
-            protected new int STR { get; set; } = 5;
+            protected new string Name { get; private set; } = "Wolf";
+            public new int Level { get; private set; } = 2;
+            public new int HP { get; private set; } = 30;
+            public new int STR { get; private set; } = 5;
+
+            public void Info()
+            {
+                Console.WriteLine($"LV{Level} [{Name}] HP: {HP}, STR: {STR}");
+            }
         }
 
         public class Slime : Monster
         {
-            protected new int Level { get; set; } = 3;
-            protected new int HP { get; set; } = 40;
-            protected new int STR { get; set; } = 8;
+            protected new string Name { get; private set; } = "Slime";
+            public new int Level { get; private set; } = 3;
+            public new int HP { get; private set; } = 40;
+            public new int STR { get; private set; } = 8;
+
+            public void Info()
+            {
+                Console.WriteLine($"LV{this.Level} [{Name}] HP: {HP}, STR: {STR}");
+            }
         }
 
     }

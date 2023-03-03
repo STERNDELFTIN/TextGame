@@ -8,6 +8,11 @@ namespace TextRPG
 {
     public class Town
     {
+        string id;
+        public Town(Dictionary<string, Player> player, string id)
+        {
+            this.id = id;
+        }
         public struct pos
         {
             public int x;
