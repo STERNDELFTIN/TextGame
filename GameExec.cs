@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TextRPG
 {
     public enum Map { Lobby, Dungeon, Town }
-
+    
+    // 게임 실행
     public class GameExec
     {
         private Map map = Map.Lobby;
 
-        public void Process()
+        public static void Process()
         {
             switch (map)
             {
@@ -25,13 +27,12 @@ namespace TextRPG
                 case Map.Town:
                     ProcessTown();
                     break;
-                default:
-                    continue;
             }
         }
 
-        public static int StartTheGame()
+        private static void ProcessLobby()
         {
+            string id, password;
             Console.WriteLine("TextRPG에 오신 것을 환영합니다!");
 
             while (true)
@@ -41,14 +42,37 @@ namespace TextRPG
                 int.TryParse(Console.ReadLine(), out int input);
                 Console.WriteLine();
 
-                if (input <= 4 && input >= 1)
-                    return input;
-                else
+                // wrong input
+                if (input > 4 || input < 1)
+                {
                     Console.WriteLine("Select again, please.\n");
+                    continue;
+                }
+                
+                switch (input)
+                {
+                    case 1: // 로그인
+                        id = Account.Login();
+                        EnterTheGame(id);
+                        break;
+                    case 2: // 회원가입
+                        id = Account.CreateAccount();
+                        if (id.Equals(""))
+                            break;
+                        
+                        break;
+                    case 3: // 비밀번호 찾기
+                            // Account.FindAccount(account):
+                        break;
+                    case 4: // 종료
+                        GameExec.EndTheGame();
+                        return;
+                }
             }
+
         }
 
-        public static void EnterTheGame(Dictionary<string, Player> player, string id)
+        private static void EnterTheGame(string id)
         {
             Console.WriteLine($"[{id}]님이 접속했습니다!");
             Console.WriteLine("[1]마을 입장\n[2]던전 입장");
@@ -58,16 +82,26 @@ namespace TextRPG
                 int.TryParse(Console.ReadLine(), out int input);
                 Console.WriteLine();
 
-                if (input == 1)
-                    new Town(player, id);
+               /* if (input == 1)
+                    new Town_1(id);
                 else if (input == 2)
-                    new Dungeon(player, id);
+                    new Dungeon_Basic(id);
                 else
                 {
                     Console.WriteLine("Select again, please.\n");
                     continue;
-                }
+                }*/
             }
+        }
+
+        private static void ProcessDungeon()
+        {
+
+        }
+
+        private static void ProcessTown()
+        {
+
         }
 
         public static void EndTheGame()

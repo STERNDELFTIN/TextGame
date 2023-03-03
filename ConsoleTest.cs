@@ -14,7 +14,6 @@ namespace TextRPG
             Dictionary<string, Player> playersList = new Dictionary<string, Player>();
             Dictionary<string, string> account = new Dictionary<string, string>();
             Monster monster = new Monster(); // 몬스터
-            
 
             string id = "", password = "";
             bool b = false; // 반복문을 빠져나오기 위한 수단으로 사용
@@ -39,67 +38,13 @@ namespace TextRPG
 
             while ( true )
             {
-                #region 로그인 및 계정생성
-                while (true)
-                {
-                    b = false;
-                    switch (GameExec.StartTheGame())
-                    {
-                        case 1: // 로그인
-                            id = Account.Login(playersList, account);
-                            if (id.Equals(""))
-                                continue;
-                            b = true;
-                            break;
-                        case 2: // 회원가입
-                            id = Account.CreateID(playersList);
-                            password = Account.CreatePassword();
-
-                            // 직업 선택 여부
-                            if (Job.WhetherSelectJob() == false)
-                            {
-                                Console.WriteLine("Select again, please.\n");
-                                continue;
-                            }
-
-                            playersList.Add(id, new Player(id));
-                            account.Add(id, password);
-
-                            // 직업 선택
-                            while (true)
-                            {
-                                Job.JobType jobChoice = Job.SelectJobType();
-                                if (jobChoice == Job.JobType.UNKNOWN)
-                                {
-                                    Console.WriteLine("Select again, please.\n");
-                                    continue;
-                                }
-                                Job.SelectJob(jobChoice, id, playersList);
-                                break;
-                            }
-                            break;
-                        case 3: // 비밀번호 찾기
-                                // Account.FindAccount(account):
-                            break;
-                        case 4: // 종료
-                            GameExec.EndTheGame();
-                            return;
-                        default:
-                            Console.WriteLine("Select again, please.\n");
-                            continue;
-                    }
-
-                    if (b == true)
-                        break;
-                }
-                #endregion
+                GameExec.Process();
 
                 #region 게임 입장
                 while (true)
                 {
                     Console.WriteLine();
                     // 1. 마을 입장? 던전 입장?
-                    GameExec.EnterTheGame(playersList, id);
 
                     // 1-1. 마을 입장
                     /// 가게, 훈련장, npc 호감도
