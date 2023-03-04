@@ -14,13 +14,12 @@ namespace TextRPG
     {
         private Map map = Map.Lobby;
 
-        public static void Process()
+        public bool Process()
         {
             switch (map)
             {
                 case Map.Lobby:
-                    ProcessLobby();
-                    break;
+                    return ProcessLobby();
                 case Map.Dungeon:
                     ProcessDungeon();
                     break;
@@ -28,15 +27,16 @@ namespace TextRPG
                     ProcessTown();
                     break;
             }
+            return true;
         }
 
-        private static void ProcessLobby()
+        public static bool ProcessLobby()
         {
-            string id, password;
-            Console.WriteLine("TextRPG에 오신 것을 환영합니다!");
+            string id;
 
             while (true)
             {
+                Console.WriteLine("TextRPG에 오신 것을 환영합니다!");
                 Console.WriteLine("[1]로그인\n[2]회원가입\n[3]비밀번호 찾기\n[4]종료");
                 Console.Write("입력# ");
                 int.TryParse(Console.ReadLine(), out int input);
@@ -51,25 +51,35 @@ namespace TextRPG
                 
                 switch (input)
                 {
+                    #region 로그인
                     case 1: // 로그인
-                        id = Account.Login();
+                        id = Account.Login() ?? "";
+                        if (id.Equals(""))
+                            continue;
                         EnterTheGame(id);
                         break;
+                    #endregion
+                    #region 회원가입
                     case 2: // 회원가입
-                        id = Account.CreateAccount();
+                        id = Account.CreateAccount() ?? "";
                         if (id.Equals(""))
-                            break;
-                        
+                            continue;
                         break;
+                    #endregion
+                    #region 비밀번호 찾기
                     case 3: // 비밀번호 찾기
-                            // Account.FindAccount(account):
+                        id = Account.FindAccount() ?? "";
+                        if (id.Equals(""))
+                            continue;
                         break;
+                    #endregion
+                    #region 종료
                     case 4: // 종료
                         GameExec.EndTheGame();
-                        return;
+                        return false;
+                    #endregion
                 }
             }
-
         }
 
         private static void EnterTheGame(string id)
