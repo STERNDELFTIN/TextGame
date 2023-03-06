@@ -8,7 +8,7 @@ namespace TextRPG
 {
     public static class Account
     {
-        static Dictionary<string, Player> player = new Dictionary<string, Player>();
+        public static Dictionary<string, Player> player = new Dictionary<string, Player>();
         static Dictionary<string, string> account = new Dictionary<string, string>();
 
         public static string ID { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TextRPG
 {
-    internal class Monster
+    public class Monster
     {
         public enum MonsterType { Unknown, Rabbit, Wolf, Slime } // 몬스터 타입을 열거형으로 정렬
         public enum StatType { Level = 1, HP = 2, STR = 3 }
@@ -25,49 +25,45 @@ namespace TextRPG
             }
         }
 
-        protected string Name { get; private set; }
-        protected int Level { get; private set; }
-        protected int HP { get; private set; }
-        protected int STR { get; private set; }
+        public string name = "";
+        public int level = 0;
+        public int hp = 0;
+        public int str = 0;
 
-        public void Info() { }
+        public void Info()
+        {
+            Console.WriteLine($"LV{level} [{name}] HP: {hp}, STR: {str}");
+        }
+
         public class Rabbit : Monster
         {
-            protected new string Name { get; private set; } = "Rabbit";
-            protected new int Level { get; private set; } = 1;
-            protected new int HP { get; private set; } = 10;
-            protected new int STR { get; private set; } = 1;
-            
-            public void Info()
+            public Rabbit()
             {
-                Console.WriteLine($"LV{Level} [{Name}] HP: {HP}, STR: {STR}");
+                base.name = "Rabbit";
+                base.level = 1;
+                base.hp = 10;
+                base.str = 1;
             }
         }
         public class Wolf : Monster
         {
-            protected new string Name { get; private set; } = "Wolf";
-            public new int Level { get; private set; } = 2;
-            public new int HP { get; private set; } = 30;
-            public new int STR { get; private set; } = 5;
-
-            public void Info()
+            public Wolf()
             {
-                Console.WriteLine($"LV{Level} [{Name}] HP: {HP}, STR: {STR}");
+                base.name = "Wolf";
+                base.level = 2;
+                base.hp = 30;
+                base.str = 5;
             }
         }
-
         public class Slime : Monster
         {
-            protected new string Name { get; private set; } = "Slime";
-            public new int Level { get; private set; } = 3;
-            public new int HP { get; private set; } = 40;
-            public new int STR { get; private set; } = 8;
-
-            public void Info()
+            public Slime()
             {
-                Console.WriteLine($"LV{this.Level} [{Name}] HP: {HP}, STR: {STR}");
+                base.name = "Slime";
+                base.level = 3;
+                base.hp = 50;
+                base.str = 6;
             }
         }
-
     }
 }

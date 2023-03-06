@@ -9,7 +9,7 @@ namespace TextRPG
     public class Town
     {
         string id;
-        public Town(Dictionary<string, Player> player, string id)
+        public Town(string id)
         {
             this.id = id;
         }

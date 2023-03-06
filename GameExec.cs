@@ -84,6 +84,9 @@ namespace TextRPG
 
         private static void EnterTheGame(string id)
         {
+            Dungeon dungeon;
+            Town town;
+
             Console.WriteLine($"[{id}]님이 접속했습니다!");
             Console.WriteLine("[1]마을 입장\n[2]던전 입장");
             while (true)
@@ -92,15 +95,16 @@ namespace TextRPG
                 int.TryParse(Console.ReadLine(), out int input);
                 Console.WriteLine();
 
-               /* if (input == 1)
-                    new Town_1(id);
+                if (input == 1)
+                    new Town(id);
                 else if (input == 2)
-                    new Dungeon_Basic(id);
+                    Dungeon.EnterTheDungeon(id);
                 else
                 {
-                    Console.WriteLine("Select again, please.\n");
+                    Console.WriteLine("Select again, please. 잘못된 숫자를 입력하셨습니다..\n");
                     continue;
-                }*/
+                }
+                break;
             }
         }
 

@@ -16,7 +16,7 @@ namespace TextRPG
                 GameExec game = new GameExec();
                 if (game.Process() == false) // 게임 종료
                     return;
-
+                
                 // 1. 마을 입장? 던전 입장?
 
                 // 1-1. 마을 입장
